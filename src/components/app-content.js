@@ -9,7 +9,7 @@ const AppContent = ({ userInfo, repos, starred}) => (
     <div className="app">
         <Search />
 
-        {!!userInfo && <UserInfo />}
+        {!!userInfo && <UserInfo userInfo={userInfo}/>}
 
         {!!userInfo && <Actions />}
 
@@ -17,26 +17,22 @@ const AppContent = ({ userInfo, repos, starred}) => (
         <Repos
             className='repos'
             title='Repositórios'
-            repos={[{
-                name: 'Nome do repositório',
-                link: '#'
-            }]} />
+            repos={repos} />
         }
 
-        {!!starred.lenght &&
+        {!!starred.length &&
         <Repos
             className='starred'
             title='Favoritos'
-            repos={[{
-                name: 'Nome do repositório',
-                link: '#'
-            }]} />
+            repos={starred} />
         }
     </div>
 )
 
 AppContent.propTypes = {
-    userInfo: PropTypes.object
+    userInfo: PropTypes.object.isRequired,
+    repos: PropTypes.array.isRequired,
+    starred: PropTypes.array.isRequired
 }
 
 export default AppContent
