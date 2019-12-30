@@ -39,7 +39,12 @@ class App extends Component {
     return (e) => {
       ajax().get(`https://api.github.com/users/${this.state.userInfo.login}/${type}`)
         .then((result) => {
-          console.log(result)
+          this.setState({
+            [type]: result.map((repo) => ({
+              name: repo.name,
+              link: repo.html_url
+            }))
+          })
         })
     }    
   }
@@ -51,7 +56,7 @@ class App extends Component {
       starred={this.state.starred}
       handleSearch={(e) => this.handleSearch(e)}
       getRepos={this.getRepos('repos')}
-      getStarred={this.getRepos('stared')}
+      getStarred={this.getRepos('starred')}
     />
   }
 }
