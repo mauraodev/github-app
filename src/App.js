@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import AppContent from './components/app-content';
 import ajax from '@fdaciuk/ajax'
 
@@ -17,7 +16,7 @@ class App extends Component {
   }
 
   getGitHubApiUrl (username, type) {
-    const internalUser = username ? `/${username}`: ''
+    const internalUser = username ? `/${username}` : ''
     const internalType = type ? `/${type}` : ''
     return `https://api.github.com/users${internalUser}${internalType}`
   }
@@ -28,9 +27,7 @@ class App extends Component {
     const ENTER = 13
 
     if (keyCode === ENTER) {
-      this.setState({
-        isFetching: true
-      })
+      this.setState({ isFetching: true })
 
       ajax().get(this.getGitHubApiUrl(value))
         .then((result) => {
@@ -47,9 +44,7 @@ class App extends Component {
             starred: []
           })
         })
-        .always(() => {
-          this.setState({ isFetching: false })
-        })
+        .always(() => this.setState({ isFetching: false }))
     }
   }
 
@@ -71,7 +66,7 @@ class App extends Component {
   render () {
     return <AppContent
       {...this.state}
-      handleSearch={this.handleSearch()}
+      handleSearch={this.handleSearch}
       getRepos={this.getRepos('repos')}
       getStarred={this.getRepos('starred')}
     />
